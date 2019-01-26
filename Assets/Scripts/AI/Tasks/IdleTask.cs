@@ -19,12 +19,12 @@ namespace AI.Tasks
 
         public void OnRemove(VillagerAI AI)
         {
-            AI.ResetAnim();
+
         }
 
         public void Update(VillagerAI AI)
         {
-            throw new System.NotImplementedException();
+
         }
     }
 }

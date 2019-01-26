@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using WBase.Unity.Extensions;
 
 namespace AI.Tasks
 {
     public class FleeTask : IAITask
     {
+        float LastDestTime = 0;
+
         public void Initialize()
         {
 
@@ -18,11 +21,16 @@ namespace AI.Tasks
 
         public void OnRemove(VillagerAI AI)
         {
-            AI.ResetAnim();
         }
 
         public void Update(VillagerAI AI)
         {
+            if (!AI.NavAgent.hasPath || Time.time > LastDestTime + VillagerAI.FLEE_UPDATE_DELAY)
+            {
+                LastDestTime = Time.time;
+                Vector3 Offset = (AI.Enemies.GetClosestTo(AI.transform.position).transform.position - AI.transform.position).normalized;
+                AI.NavAgent.SetDestination(AI.transform.position + Offset);
+            }
         }
     }
 }
