@@ -2,6 +2,7 @@ using System;
 using AI.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using WBase.Unity.Extensions;
 using WBase.Unity.Util;
 
 namespace AI
@@ -14,13 +15,13 @@ namespace AI
         public static readonly IAITask HOME = new ReturnHomeTask();
         public static readonly IAITask FLEE = new FleeTask();
 
-        public const double FLEE_DIST = 10;
+        public double FleeDistance = 10;
         public const double FLEE_UPDATE_DELAY = 1;
         public const double WANDER_UPDATE_DELAY = 10;
 
         public Animator Animator { get; private set; }
         public NavMeshAgent NavAgent { get; private set; }
-        public GameObject Player { get; private set; }
+        public GameObject[] Enemies { get; private set; }
         public UnityEngine.Random RNG { get; private set; }
 
         private IAITask currentTask;
@@ -46,7 +47,7 @@ namespace AI
         public void Awake()
         {
             UnityEngine.Random.InitState(TimeUtil.UnixTimestamp);
-            Player = GameObject.FindGameObjectWithTag("Player");
+            Enemies = GameObject.FindGameObjectsWithTag("Enemy");
             Animator = GetComponent<Animator>();
             NavAgent = transform.parent.GetComponent<NavMeshAgent>();
         }
@@ -64,7 +65,7 @@ namespace AI
         /// </summary>
         public void Update()
         {
-            if ((Player.transform.position - transform.position).magnitude < FLEE_DIST)
+            if ((Enemies.GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
             {
                 CurrentTask = FLEE;
             }
@@ -75,7 +76,7 @@ namespace AI
 
         public void ResetAnim()
         {
-            Animator.SetBool("IsIdle", false);
+            Animator.SetBool("IsIdle", true);
             Animator.SetBool("IsWalking", false);
             Animator.SetBool("IsRunning", false);
         }
