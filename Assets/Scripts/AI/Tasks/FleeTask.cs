@@ -2,8 +2,7 @@
 
 namespace AI.Tasks
 {
-    [RequireComponent(typeof(Animation))]
-    internal class IdleTask : IAITask
+    public class FleeTask : IAITask
     {
         public void Initialize()
         {
@@ -12,9 +11,9 @@ namespace AI.Tasks
 
         public void OnAdd(VillagerAI AI)
         {
-            AI.Animator.SetBool("IsIdle", true);
+            AI.Animator.SetBool("IsIdle", false);
             AI.Animator.SetBool("IsWalking", false);
-            AI.Animator.SetBool("IsRunning", false);
+            AI.Animator.SetBool("IsRunning", true);
         }
 
         public void OnRemove(VillagerAI AI)
@@ -24,7 +23,6 @@ namespace AI.Tasks
 
         public void Update(VillagerAI AI)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -4,11 +4,11 @@ namespace AI
 {
     public interface IAITask
     {
-        void Update(GameObject gameObject);
+        void Update(VillagerAI AI);
 
-        void OnRemove(GameObject gameObject);
+        void OnRemove(VillagerAI AI);
 
-        void OnAdd(GameObject gameObject);
+        void OnAdd(VillagerAI AI);
 
         void Initialize();
     }

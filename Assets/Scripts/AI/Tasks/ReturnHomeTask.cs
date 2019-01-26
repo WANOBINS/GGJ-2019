@@ -9,22 +9,23 @@ namespace AI.Tasks
 
         public void Initialize()
         {
-            throw new NotImplementedException();
+
         }
 
-        public void OnAdd(GameObject gameObject)
+        public void OnAdd(VillagerAI AI)
         {
-            throw new NotImplementedException();
+            AI.Animator.SetBool("IsIdle", false);
+            AI.Animator.SetBool("IsWalking", true);
+            AI.Animator.SetBool("IsRunning", false);
         }
 
-        public void OnRemove(GameObject gameObject)
+        public void OnRemove(VillagerAI AI)
         {
-            throw new NotImplementedException();
+            AI.ResetAnim();
         }
 
-        public void Update(GameObject gameObject)
+        public void Update(VillagerAI AI)
         {
-            throw new NotImplementedException();
         }
     }
 }
