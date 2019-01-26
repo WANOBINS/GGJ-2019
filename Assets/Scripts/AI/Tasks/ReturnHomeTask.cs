@@ -21,11 +21,15 @@ namespace AI.Tasks
 
         public void OnRemove(VillagerAI AI)
         {
-            AI.ResetAnim();
+
         }
 
         public void Update(VillagerAI AI)
         {
+            if (!AI.NavAgent.hasPath)
+            {
+                AI.NavAgent.SetDestination(HomePos);
+            }
         }
     }
 }
