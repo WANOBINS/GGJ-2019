@@ -36,7 +36,7 @@ public class Altar : MonoBehaviour {
         }
         if (Demon2 == null)
         {
-            Demon2 = Instantiate(DemonPrefab, transform.position, transform.rotation).GetComponent<DemonAI,>();
+            Demon2 = Instantiate(DemonPrefab, transform.position, transform.rotation).GetComponent<DemonAI>();
         }
     }
 
