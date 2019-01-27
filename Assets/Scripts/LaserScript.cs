@@ -5,7 +5,8 @@ using UnityEngine;
 public class LaserScript : MonoBehaviour
 {
     LineRenderer laserRenderer;
-    public GameObject House;
+    public GameObject[] Buildings;
+    public int SelectedBuild = 0;
 	// Use this for initialization
 	void Start ()
     {
@@ -35,10 +36,23 @@ public class LaserScript : MonoBehaviour
         {
             if (Physics.Raycast(ray, out LaserHit))
             {
-                Instantiate(House, LaserHit.point + new Vector3(0f, 50f, 0f), transform.rotation);
+                Instantiate(Buildings[SelectedBuild], LaserHit.point + new Vector3(0f, 50f, 0f), transform.rotation);
                                     
                 print(LaserHit.point);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectedBuild = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectedBuild = 1;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectedBuild = 2;
         }
     }   
 }
