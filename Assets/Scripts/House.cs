@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,20 +18,21 @@ public class House : MonoBehaviour {
             gameManager.Houses.Add(gameObject);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (GetComponent<Rigidbody>().IsSleeping())
+
+    internal void SpawnVillagers()
+    {
+        if (Villager1 == null)
         {
-            if (Villager1 == null)
-            {
-                Villager1 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
-            }
-            if (Villager2 == null)
-            {
-                Villager2 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
-            }
+            Villager1 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
         }
+        if (Villager2 == null)
+        {
+            Villager2 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
     }
 
     private void OnDestroy()

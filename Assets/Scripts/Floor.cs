@@ -13,6 +13,10 @@ namespace Assets.Scripts
         {
             if(collision.gameObject.GetComponent<House>() != null || collision.gameObject.GetComponent<Altar>() != null || collision.gameObject.GetComponent<Gazebo>() != null)
             {
+                if (collision.gameObject.GetComponent<House>())
+                {
+                    collision.gameObject.GetComponent<House>().SpawnVillagers();
+                }
                 collision.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().UpdateNavMesh();
             }
