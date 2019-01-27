@@ -23,14 +23,8 @@ public class Gazebo : MonoBehaviour {
         if (GetComponent<Rigidbody>().IsSleeping())
         {
             if (!LastSleepCheck)
-            {
                 gameManager.UpdateNavMesh();
-            }
-            LastSleepCheck = true;
-        }
-        else
-        {
-            LastSleepCheck = false;
+            LastSleepCheck = GetComponent<Rigidbody>().IsSleeping();
         }
     }
 
