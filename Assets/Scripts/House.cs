@@ -37,6 +37,7 @@ public class House : MonoBehaviour {
 
     private void OnDestroy()
     {
+        gameManager.UpdateNavMesh();
         if (gameManager.Houses.Contains(gameObject))
         {
             gameManager.Houses.Remove(gameObject);
