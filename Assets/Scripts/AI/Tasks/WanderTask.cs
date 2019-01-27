@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using RNG = UnityEngine.Random;
 using Log = UnityEngine.Debug;
 
 namespace AI.Tasks
@@ -45,9 +44,14 @@ namespace AI.Tasks
             if (!AI.NavAgent.hasPath || Time.time > LastDestTime + AIBase.WANDER_UPDATE_DELAY)
             {
                 LastDestTime = Time.time;
-                AI.NavAgent.SetDestination(new Vector3(RNG.Range(AIBase.WANDER_LOW_BOUND.x,AIBase.WANDER_HIGH_BOUND.x),0,RNG.Range(AIBase.WANDER_LOW_BOUND.y,AIBase.WANDER_HIGH_BOUND.y)));
+                AI.NavAgent.SetDestination(new Vector3((float)RandomRange(AIBase.WANDER_LOW_BOUND.x,AIBase.WANDER_HIGH_BOUND.x),0,(float)RandomRange(AIBase.WANDER_LOW_BOUND.y,AIBase.WANDER_HIGH_BOUND.y)));
                 Log.Log(AI.gameObject.name + " destination set to " + AI.NavAgent.destination);
             }
+        }
+
+        private double RandomRange(double min, double max)
+        {
+            return min + (max - min) * AIBase.RNG.NextDouble();
         }
     }
 }

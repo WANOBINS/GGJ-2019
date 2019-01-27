@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using WBase.Unity.Extensions;
 
 public class GameManager : MonoBehaviour
@@ -35,5 +36,18 @@ public class GameManager : MonoBehaviour
         Houses.PurgeNulls();
         Portals.PurgeNulls();
         Gibs.PurgeNulls();
+    }
+
+    public void UpdateNavMesh()
+    {
+        foreach(GameObject go in GameObject.FindGameObjectsWithTag("Navable"))
+        {
+            NavigationBaker navigationBaker = go.GetComponent<NavigationBaker>();
+            if(navigationBaker != null)
+            {
+                navigationBaker.Bake();
+                Debug.Log("Telling " + go.name + " to re-bake navmesh");
+            }
+        }
     }
 }

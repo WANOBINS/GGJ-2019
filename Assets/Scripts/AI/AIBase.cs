@@ -12,13 +12,16 @@ namespace AI
 {
     public class AIBase : MonoBehaviour
     {
+        public static System.Random RNG = new System.Random(TimeUtil.UnixTimestamp);
+
         public static readonly IAITask IDLE = new IdleTask();
         public static readonly IAITask WANDER = new WanderTask();
 
-        public static readonly Vector2 WANDER_LOW_BOUND = new Vector2(-100, -100);
-        public static readonly Vector2 WANDER_HIGH_BOUND = new Vector2(100, 100);
+        public static readonly Vector2 WANDER_LOW_BOUND = new Vector2(-1000, -1000);
+        public static readonly Vector2 WANDER_HIGH_BOUND = new Vector2(1000, 1000);
 
         public const double WANDER_UPDATE_DELAY = 10;
+        public const double WANDER_GIMME = 2;
 
         public Animator Animator { get; protected set; }
         public NavMeshAgent NavAgent { get; protected set; }
@@ -63,6 +66,10 @@ namespace AI
         // Update is called once per frame
         public virtual void Update()
         {
+            if(Vector3.Distance(NavAgent.destination,transform.position) < WANDER_GIMME)
+            {
+                NavAgent.ResetPath();
+            }
             CurrentTask.Update(this);
         }
 

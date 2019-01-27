@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Altar
   - House
+  - Navable
   layers:
   - Default
   - TransparentFX

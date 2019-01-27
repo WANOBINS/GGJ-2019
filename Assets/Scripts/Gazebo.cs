@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WBase.Unity.Extensions;
 
 public class Gazebo : MonoBehaviour {
     GameManager gameManager;
@@ -22,6 +23,14 @@ public class Gazebo : MonoBehaviour {
         if (gameManager.Gazebos.Contains(gameObject))
         {
             gameManager.Gazebos.Remove(gameObject);
+        }
+    }
+
+    public void SetStatic(bool isStatic)
+    {
+        foreach(GameObject go in gameObject.GetChildrenRecursively())
+        {
+            go.isStatic = isStatic;
         }
     }
 }

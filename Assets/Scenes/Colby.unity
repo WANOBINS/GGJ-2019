@@ -103,7 +103,7 @@ NavMeshSettings:
     agentSlope: 30
     agentClimb: 0.4
     ledgeDropHeight: 1
-    maxJumpAcrossDistance: 0.5
+    maxJumpAcrossDistance: 0.75
     minRegionArea: 2
     manualCellSize: 0
     cellSize: 0.33333334
@@ -364,6 +364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7346d0dd0c6384e901b861d6105617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerHappiness: 0
+  PlayerGibs: 0
 --- !u!4 &1768960729
 Transform:
   m_ObjectHideFlags: 0
@@ -400,6 +402,7 @@ GameObject:
   - component: {fileID: 1841743737}
   - component: {fileID: 1841743736}
   - component: {fileID: 1841743735}
+  - component: {fileID: 1841743739}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -475,3 +478,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1841743739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1841743734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}

@@ -17,8 +17,9 @@ namespace AI {
         public int GibCount = 0;
         public int Happiness { get; internal set; } = 10;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
             if (!GameManager.Demons.Contains(gameObject))
             {
                 GameManager.Demons.Add(gameObject);
