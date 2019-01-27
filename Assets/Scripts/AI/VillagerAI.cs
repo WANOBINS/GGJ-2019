@@ -27,6 +27,10 @@ namespace AI
         public override void Start()
         {
             base.Start();
+            if (!GameManager.Villagers.Contains(gameObject))
+            {
+                GameManager.Villagers.Add(gameObject);
+            }
             HOME.Initialize();
             FLEE.Initialize();
         }
@@ -41,7 +45,7 @@ namespace AI
             {
                 CurrentTask = WANDER;
             }
-            if (GameManager.Enemies.Count > 0 && (GameManager.Enemies.GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
+            if (GameManager.Demons.Count > 0 && (GameManager.Demons.GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
             {
                 CurrentTask = FLEE;
             }
@@ -50,6 +54,14 @@ namespace AI
         public override void ResetAnim()
         {
             base.ResetAnim();
+        }
+
+        private void OnDestroy()
+        {
+            if (GameManager.Villagers.Contains(gameObject))
+            {
+                GameManager.Villagers.Remove(gameObject);
+            }
         }
     }
 }

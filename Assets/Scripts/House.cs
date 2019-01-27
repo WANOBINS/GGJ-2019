@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Altar : MonoBehaviour {
+public class House : MonoBehaviour {
     GameManager gameManager;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        if (!gameManager.Portals.Contains(gameObject))
+        if (!gameManager.Houses.Contains(gameObject))
         {
-            gameManager.Portals.Add(gameObject);
+            gameManager.Houses.Add(gameObject);
         }
 	}
 	
@@ -20,9 +20,9 @@ public class Altar : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if (gameManager.Portals.Contains(gameObject))
+        if (gameManager.Houses.Contains(gameObject))
         {
-            gameManager.Portals.Remove(gameObject);
+            gameManager.Houses.Remove(gameObject);
         }
     }
 }

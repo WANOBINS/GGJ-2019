@@ -17,6 +17,14 @@ namespace AI {
         public int GibCount = 0;
         public int Happiness { get; internal set; } = 10;
 
+        private void Start()
+        {
+            if (!GameManager.Demons.Contains(gameObject))
+            {
+                GameManager.Demons.Add(gameObject);
+            }
+        }
+
         public override void Update()
         {
             base.Update();
@@ -31,6 +39,14 @@ namespace AI {
             else
             {
                 CurrentTask = WANDER;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (GameManager.Demons.Contains(gameObject))
+            {
+                GameManager.Demons.Remove(gameObject);
             }
         }
     }
