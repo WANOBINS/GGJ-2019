@@ -14,6 +14,7 @@ namespace AI
         public static readonly IAITask HOME = new ReturnHomeTask();
         public static readonly IAITask FLEE = new FleeTask();
 
+        public float Happiness = 0;
         public double FleeDistance = 10;
         public const double FLEE_UPDATE_DELAY = 1;
 
