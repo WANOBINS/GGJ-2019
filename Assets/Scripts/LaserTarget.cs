@@ -31,7 +31,7 @@ public class LaserTarget : MonoBehaviour {
             GameObject brokenHouse = Instantiate(BrokenHouse, transform.position, transform.rotation);
             Destroy(gameObject);
             brokenHouse.GetComponent<Explosive>().Trigger();
-            gameManager.UpdateNavMesh();
         }
+        gameManager.UpdateNavMesh();
     }
 }
