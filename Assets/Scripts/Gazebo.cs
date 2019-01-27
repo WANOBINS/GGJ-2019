@@ -26,6 +26,11 @@ public class Gazebo : MonoBehaviour {
             {
                 gameManager.UpdateNavMesh();
             }
+            LastSleepCheck = true;
+        }
+        else
+        {
+            LastSleepCheck = false;
         }
     }
 

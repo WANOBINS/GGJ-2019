@@ -22,11 +22,18 @@ public class House : MonoBehaviour {
 	void Update () {
         if (GetComponent<Rigidbody>().IsSleeping())
         {
-            if (!LastSleepCheck)
+            if (GetComponent<Rigidbody>().IsSleeping())
             {
-                gameManager.UpdateNavMesh();
+                if (!LastSleepCheck)
+                {
+                    gameManager.UpdateNavMesh();
+                }
+                LastSleepCheck = true;
             }
-            LastSleepCheck = true;
+            else
+            {
+                LastSleepCheck = false;
+            }
             if (Villager1 == null)
             {
                 Villager1 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
