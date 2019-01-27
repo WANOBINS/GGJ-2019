@@ -7,6 +7,7 @@ public class House : MonoBehaviour {
     GameObject VillagerPrefab;
     Villager Villager1 = null;
     Villager Villager2 = null;
+    bool LastSleepCheck = false;
     // Use this for initialization
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
@@ -19,13 +20,21 @@ public class House : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Villager1 == null)
+        if (GetComponent<Rigidbody>().IsSleeping())
         {
-            Villager1 = Instantiate(VillagerPrefab, transform.position,transform.rotation).GetComponent<Villager>();
-        }
-        if (Villager2 == null)
-        {
-            Villager2 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
+            if (!LastSleepCheck)
+            {
+                gameManager.UpdateNavMesh();
+            }
+            LastSleepCheck = true;
+            if (Villager1 == null)
+            {
+                Villager1 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
+            }
+            if (Villager2 == null)
+            {
+                Villager2 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
+            }
         }
     }
 

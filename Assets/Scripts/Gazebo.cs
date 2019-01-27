@@ -5,19 +5,30 @@ using WBase.Unity.Extensions;
 
 public class Gazebo : MonoBehaviour {
     GameManager gameManager;
-	// Use this for initialization
-	void Start () {
+
+    public bool LastSleepCheck { get; private set; } = false;
+
+    // Use this for initialization
+    void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (!gameManager.Gazebos.Contains(gameObject))
         {
             gameManager.Gazebos.Add(gameObject);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GetComponent<Rigidbody>().IsSleeping())
+        {
+            if (!LastSleepCheck)
+            {
+                gameManager.UpdateNavMesh();
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         if (gameManager.Gazebos.Contains(gameObject))
@@ -33,4 +44,5 @@ public class Gazebo : MonoBehaviour {
             go.isStatic = isStatic;
         }
     }
+}
 }

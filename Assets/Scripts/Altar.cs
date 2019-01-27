@@ -5,19 +5,30 @@ using UnityEngine.AI;
 
 public class Altar : MonoBehaviour {
     GameManager gameManager;
-	// Use this for initialization
-	void Start () {
+
+    public bool LastSleepCheck { get; private set; } = false;
+
+    // Use this for initialization
+    void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (!gameManager.Portals.Contains(gameObject))
         {
             gameManager.Portals.Add(gameObject);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GetComponent<Rigidbody>().IsSleeping())
+        {
+            if (!LastSleepCheck)
+            {
+                gameManager.UpdateNavMesh();
+            }
+
+        }
+    }
 
     private void OnDestroy()
     {
