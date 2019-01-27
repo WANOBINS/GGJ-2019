@@ -15,12 +15,16 @@ namespace AI
         public static readonly IAITask IDLE = new IdleTask();
         public static readonly IAITask WANDER = new WanderTask();
 
+        public static readonly Vector2 WANDER_LOW_BOUND = new Vector2(-100, -100);
+        public static readonly Vector2 WANDER_HIGH_BOUND = new Vector2(100, 100);
+
+        public const double WANDER_UPDATE_DELAY = 10;
+
         public Animator Animator { get; protected set; }
         public NavMeshAgent NavAgent { get; protected set; }
         public GameManager GameManager { get; protected set; }
 
-        public UnityEngine.Random RNG { get; private set; }
-
+        [SerializeField]
         protected IAITask currentTask = IDLE;
         public IAITask CurrentTask
         {
@@ -32,7 +36,6 @@ namespace AI
             {
                 if (currentTask == value)
                 {
-                    ResetAnim();
                     return;
                 }
                 currentTask.OnRemove(this);
@@ -54,15 +57,13 @@ namespace AI
         {
             IDLE.Initialize();
             WANDER.Initialize();
+            ResetAnim();
         }
 
         // Update is called once per frame
         public virtual void Update()
         {
-            if (!NavAgent.hasPath && CurrentTask != IDLE)
-            {
-                CurrentTask = IDLE;
-            }
+            CurrentTask.Update(this);
         }
 
         public virtual void ResetAnim()

@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Enemies { get; private set; } = new List<GameObject>();
     public List<GameObject> Gazebos { get; private set; } = new List<GameObject>();
     public List<GameObject> Houses { get; private set; } = new List<GameObject>();
+    public List<GameObject> Portals { get; private set; } = new List<GameObject>();
+    public List<GameObject> Gibs { get; private set; } = new List<GameObject>();
+
     // Use this for initialization
     private void Start()
     {
@@ -26,5 +29,7 @@ public class GameManager : MonoBehaviour
         Enemies.PurgeNulls();
         Gazebos.PurgeNulls();
         Houses.PurgeNulls();
+        Portals.PurgeNulls();
+        Gibs.PurgeNulls();
     }
 }

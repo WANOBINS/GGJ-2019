@@ -16,7 +16,6 @@ namespace AI
 
         public double FleeDistance = 10;
         public const double FLEE_UPDATE_DELAY = 1;
-        public const double WANDER_UPDATE_DELAY = 10;
 
         public override void Awake()
         {
@@ -37,17 +36,14 @@ namespace AI
         public override void Update()
         {
             base.Update();
-            if(NavAgent.hasPath && CurrentTask == IDLE)
+            if(!NavAgent.hasPath || CurrentTask == IDLE)
             {
                 CurrentTask = WANDER;
             }
-            if (GameManager.Enemies.Count > 0 && (GameManager.Enemies.ToArray().GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
+            if (GameManager.Enemies.Count > 0 && (GameManager.Enemies.GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
             {
                 CurrentTask = FLEE;
             }
-            if (CurrentTask == null)
-                return;
-            CurrentTask.Update(this);
         }
 
         public override void ResetAnim()

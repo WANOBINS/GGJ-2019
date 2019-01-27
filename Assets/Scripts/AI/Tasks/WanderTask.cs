@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using RNG = UnityEngine.Random;
+using Log = UnityEngine.Debug;
 
 namespace AI.Tasks
 {
@@ -17,9 +19,6 @@ namespace AI.Tasks
         public void OnAdd(AIBase AI)
         {
             this.AI = AI;
-            AI.Animator.SetBool("IsIdle", false);
-            AI.Animator.SetBool("IsWalking", true);
-            AI.Animator.SetBool("IsRunning", false);
             AI.NavAgent.speed = 5;
         }
 
@@ -30,10 +29,24 @@ namespace AI.Tasks
 
         public void Update(AIBase AI)
         {
-            if (!AI.NavAgent.hasPath || Time.time > LastDestTime + VillagerAI.WANDER_UPDATE_DELAY)
+            if (AI.NavAgent.hasPath)
+            {
+                AI.Animator.SetBool("IsIdle", false);
+                AI.Animator.SetBool("IsWalking", true);
+                AI.Animator.SetBool("IsRunning", false);
+            }
+            else
+            {
+                AI.Animator.SetBool("IsIdle", true);
+                AI.Animator.SetBool("IsWalking", false);
+                AI.Animator.SetBool("IsRunning", false);
+            }
+
+            if (!AI.NavAgent.hasPath || Time.time > LastDestTime + AIBase.WANDER_UPDATE_DELAY)
             {
                 LastDestTime = Time.time;
-                AI.NavAgent.SetDestination(new Vector3());
+                AI.NavAgent.SetDestination(new Vector3(RNG.Range(AIBase.WANDER_LOW_BOUND.x,AIBase.WANDER_HIGH_BOUND.x),0,RNG.Range(AIBase.WANDER_LOW_BOUND.y,AIBase.WANDER_HIGH_BOUND.y)));
+                Log.Log(AI.gameObject.name + " destination set to " + AI.NavAgent.destination);
             }
         }
     }
