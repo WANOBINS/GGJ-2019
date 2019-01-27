@@ -7,6 +7,8 @@ TagManager:
   - Villager
   - Demon
   - Enemy
+  - Altar
+  - House
   layers:
   - Default
   - TransparentFX
