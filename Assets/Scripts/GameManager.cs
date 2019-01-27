@@ -27,6 +27,16 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         PurgeLists();
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            foreach(GameObject vil in Villagers)
+            {
+                vil.GetComponent<Villager>().OnDeath();
+            }
+
+
+        }
     }
 
     private void PurgeLists()

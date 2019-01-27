@@ -12,7 +12,7 @@ public class House : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        VillagerPrefab = Resources.Load<GameObject>("Prefab/Villager");
+        VillagerPrefab = Resources.Load<GameObject>("Prefabs/Villager");
         if (!gameManager.Houses.Contains(gameObject))
         {
             gameManager.Houses.Add(gameObject);
