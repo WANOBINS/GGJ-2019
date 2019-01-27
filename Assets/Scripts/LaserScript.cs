@@ -7,10 +7,12 @@ public class LaserScript : MonoBehaviour
     LineRenderer laserRenderer;
     public GameObject[] Buildings;
     public int SelectedBuild = 0;
+    public GameManager myGM;
 	// Use this for initialization
 	void Start ()
     {
-        laserRenderer = GetComponent<LineRenderer>();        
+        laserRenderer = GetComponent<LineRenderer>();
+        myGM = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame
@@ -26,17 +28,40 @@ public class LaserScript : MonoBehaviour
                 laserRenderer.enabled = true;
                 laserRenderer.SetPosition(0, transform.position);
                 laserRenderer.SetPosition(1, LaserHit.point);
-                
-                if(Input.GetMouseButtonUp(0)|| Input.GetKeyUp(KeyCode.LeftAlt))
-                laserRenderer.enabled = false;
+
+
+                House houseHit = LaserHit.collider.transform.GetComponentInParent<House>();
+                if(houseHit != null)
+                {
+                    houseHit.gameObject.AddComponent<LaserTarget>().LaserHit();
+                }
+
                 print(LaserHit.point);
             }
+        }
+        else if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            laserRenderer.enabled = false;
         }
         else if(Input.GetMouseButtonDown(0)) // Spawn Buildings
         {
             if (Physics.Raycast(ray, out LaserHit))
             {
-                Instantiate(Buildings[SelectedBuild], LaserHit.point + new Vector3(0f, 50f, 0f), transform.rotation);
+                if(Buildings[SelectedBuild].GetComponent<Altar>() == null)
+                {
+                    GameObject NewBuild = Instantiate(Buildings[SelectedBuild], LaserHit.point + new Vector3(0f, 50f, 0f), transform.rotation);
+                    NewBuild.GetComponent<Rigidbody>().AddForce(-Vector3.up * 1000);
+                }
+                else
+                {
+                    if(myGM.PlayerGibs >= 5)
+                    {
+                        GameObject NewBuild = Instantiate(Buildings[SelectedBuild], LaserHit.point + new Vector3(0f, 50f, 0f), transform.rotation);
+                        NewBuild.GetComponent<Rigidbody>().AddForce(-Vector3.up * 1000);
+                        myGM.PlayerGibs -= 5;
+                    }
+                }
+                
                                     
                 print(LaserHit.point);
             }
@@ -52,7 +77,7 @@ public class LaserScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SelectedBuild = 2;
+            
         }
     }   
 }

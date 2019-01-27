@@ -157,7 +157,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: df1638130c9087e43801f7bd2c84019e, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -251,9 +251,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Buildings:
   - {fileID: 1163365853645838, guid: 343382d76cd208647a0bbd7e6e5fe7a2, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1833639218260996, guid: 1456576ee696e4f4388c0e0657b15349, type: 2}
+  - {fileID: 1521364950789778, guid: 9c09c9945d281084a81059dca8de2ea5, type: 2}
   SelectedBuild: 0
+  myGM: {fileID: 0}
 --- !u!1001 &1069038387
 Prefab:
   m_ObjectHideFlags: 0
@@ -293,25 +294,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 54625242117155694, guid: 343382d76cd208647a0bbd7e6e5fe7a2,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 343382d76cd208647a0bbd7e6e5fe7a2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1069038388 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1163365853645838, guid: 343382d76cd208647a0bbd7e6e5fe7a2,
-    type: 2}
-  m_PrefabInternal: {fileID: 1069038387}
---- !u!114 &1069038389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1069038388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbcc9dfc21815a148b1fe9093765deef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1117983670
 Prefab:
   m_ObjectHideFlags: 0
