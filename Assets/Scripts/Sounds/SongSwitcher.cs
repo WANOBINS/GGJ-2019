@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SongSwitcher : MonoBehaviour
 {
-    public AudioSource songPlayer;
+    public AudioSource happySongPlayer;
+    public AudioSource demonSongPlayer;
 
     public AudioClip Demon;
     public AudioClip Happy;
 
     [Range(0, 1)]
-    public float DemonVolume = 0.5;
+    public float DemonVolume = 0.5f;
     [Range(0, 1)]
-    public float HappyVolume = 0.5;
+    public float HappyVolume = 0.5f;
 
     public GameObject ClosestStruc;
     public float distance;
@@ -20,8 +21,9 @@ public class SongSwitcher : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        songPlayer = gameObject.AddComponent<AudioSource>();
-	}
+        demonSongPlayer = gameObject.AddComponent<AudioSource>();
+        happySongPlayer = gameObject.AddComponent<AudioSource>();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -29,34 +31,49 @@ public class SongSwitcher : MonoBehaviour
 		if(DemonMusic)
         {
 
-            songPlayer.clip = Demon;
-            songPlayer.volume = DemonVolume;
-            if(songPlayer.isPlaying)
+            demonSongPlayer.clip = Demon;
+            demonSongPlayer.volume = DemonVolume;
+            demonSongPlayer.loop = true;
+            if(!demonSongPlayer.isPlaying)
             {
-                songPlayer.Play();
+                demonSongPlayer.Play();
+                happySongPlayer.Pause();
             }
+
             
         }
+        else
+        {
+            happySongPlayer.clip = Happy;
+            happySongPlayer.volume = HappyVolume;
+            happySongPlayer.loop = true;
+            if (!happySongPlayer.isPlaying)
+            {
+                happySongPlayer.Play();
+                demonSongPlayer.Pause();
+            }
+        }
+    
 	}
 
-    void OnTriggerEnter(collider collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Altar")
+        if(collision.gameObject.GetComponent<House>())
         {
-            if(Vector3.Distance(gameObject.transform, collision.gameObject.transform) < distance)
+            if(Vector3.Distance(gameObject.transform.position, collision.gameObject.transform.position) < distance)
             {
-                distance = Vector3.Distance(gameObject.transform, collision.gameObject.transform);
+                distance = Vector3.Distance(gameObject.transform.position, collision.gameObject.transform.position);
                 ClosestStruc = collision.gameObject;
                 DemonMusic = true;
 
             }
         }
 
-        if (collision.gameObject.tag == "House")
+        if (collision.gameObject.GetComponent<Altar>())
         {
-            if (Vector3.Distance(gameObject.transform, collision.gameObject.transform) < distance)
+            if (Vector3.Distance(gameObject.transform.position, collision.gameObject.transform.position) < distance)
             {
-                distance = Vector3.Distance(gameObject.transform, collision.gameObject.transform);
+                distance = Vector3.Distance(gameObject.transform.position, collision.gameObject.transform.position);
                 ClosestStruc = collision.gameObject;
                 DemonMusic = false;
 
