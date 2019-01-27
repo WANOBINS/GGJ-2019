@@ -5,9 +5,11 @@ using UnityEngine;
 public class LaserTarget : MonoBehaviour {
     GameObject BrokenHouse;
     GameObject Gibs;
+    private GameManager gameManager;
 
     private void Awake()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         BrokenHouse = Resources.Load<GameObject>("Prefabs/BrokenHouse");
         Gibs = Resources.Load<GameObject>("Prefabs/Giblets");
     }
@@ -29,6 +31,7 @@ public class LaserTarget : MonoBehaviour {
             GameObject brokenHouse = Instantiate(BrokenHouse, transform.position, transform.rotation);
             Destroy(gameObject);
             brokenHouse.GetComponent<Explosive>().Trigger();
+            gameManager.UpdateNavMesh();
         }
     }
 }
