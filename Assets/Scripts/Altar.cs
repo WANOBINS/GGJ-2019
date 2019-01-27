@@ -25,6 +25,7 @@ public class Altar : MonoBehaviour {
 
     private void OnDestroy()
     {
+        gameManager.UpdateNavMesh();
         if (gameManager.Portals.Contains(gameObject))
         {
             gameManager.Portals.Remove(gameObject);

@@ -25,6 +25,7 @@ public class Gazebo : MonoBehaviour {
 
     private void OnDestroy()
     {
+        gameManager.UpdateNavMesh();
         if (gameManager.Gazebos.Contains(gameObject))
         {
             gameManager.Gazebos.Remove(gameObject);
