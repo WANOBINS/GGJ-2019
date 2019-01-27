@@ -560,6 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1a7f379fe7aaf4793ed1025c8b1ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
   happySongPlayer: {fileID: 0}
   demonSongPlayer: {fileID: 0}
   Demon: {fileID: 8300000, guid: 0274c09ad2166e74cba58b4384a9aa8e, type: 3}
@@ -567,7 +568,8 @@ MonoBehaviour:
   DemonVolume: 1
   HappyVolume: 0.5
   ClosestStruc: {fileID: 0}
-  distance: 0
+  max_distance: 5000
+  distance: 10
   DemonMusic: 0
 --- !u!1 &1486530357
 GameObject:

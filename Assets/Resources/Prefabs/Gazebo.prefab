@@ -108,6 +108,8 @@ GameObject:
   - component: {fileID: 114521468441939680}
   - component: {fileID: 54339994417813730}
   - component: {fileID: 65006591356615710}
+  - component: {fileID: 114743470320367450}
+  - component: {fileID: 114867183569943892}
   m_Layer: 0
   m_Name: Gazebo
   m_TagString: Navable
@@ -427,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &114743470320367450
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833639218260996}
@@ -455,7 +457,7 @@ MonoBehaviour:
   m_NavMeshData: {fileID: 0}
 --- !u!114 &114867183569943892
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1833639218260996}

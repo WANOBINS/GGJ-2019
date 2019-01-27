@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 65574802242002986}
   - component: {fileID: 65658287527850390}
   - component: {fileID: 65308340806565846}
+  - component: {fileID: 114379285005706188}
+  - component: {fileID: 114798035507114332}
   m_Layer: 0
   m_Name: Normal House
   m_TagString: House
@@ -2358,7 +2360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &114379285005706188
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1163365853645838}
@@ -2386,7 +2388,7 @@ MonoBehaviour:
   m_NavMeshData: {fileID: 0}
 --- !u!114 &114798035507114332
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1163365853645838}
