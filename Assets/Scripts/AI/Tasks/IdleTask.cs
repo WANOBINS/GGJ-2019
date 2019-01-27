@@ -10,19 +10,19 @@ namespace AI.Tasks
 
         }
 
-        public void OnAdd(VillagerAI AI)
+        public void OnAdd(AIBase AI)
         {
             AI.Animator.SetBool("IsIdle", true);
             AI.Animator.SetBool("IsWalking", false);
             AI.Animator.SetBool("IsRunning", false);
         }
 
-        public void OnRemove(VillagerAI AI)
+        public void OnRemove(AIBase AI)
         {
 
         }
 
-        public void Update(VillagerAI AI)
+        public void Update(AIBase AI)
         {
 
         }

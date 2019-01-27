@@ -12,23 +12,25 @@ namespace AI.Tasks
 
         }
 
-        public void OnAdd(VillagerAI AI)
+        public void OnAdd(AIBase AI)
         {
             AI.Animator.SetBool("IsIdle", false);
             AI.Animator.SetBool("IsWalking", false);
             AI.Animator.SetBool("IsRunning", true);
+            AI.NavAgent.speed = 10;
         }
 
-        public void OnRemove(VillagerAI AI)
+        public void OnRemove(AIBase AI)
         {
+            AI.NavAgent.speed = 5;
         }
 
-        public void Update(VillagerAI AI)
+        public void Update(AIBase AI)
         {
             if (!AI.NavAgent.hasPath || Time.time > LastDestTime + VillagerAI.FLEE_UPDATE_DELAY)
             {
                 LastDestTime = Time.time;
-                Vector3 Offset = (AI.Enemies.GetClosestTo(AI.transform.position).transform.position - AI.transform.position).normalized;
+                Vector3 Offset = (AI.GameManager.Enemies.ToArray().GetClosestTo(AI.transform.position).transform.position - AI.transform.position).normalized;
                 AI.NavAgent.SetDestination(AI.transform.position + Offset);
             }
         }

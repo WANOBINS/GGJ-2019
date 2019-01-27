@@ -12,19 +12,20 @@ namespace AI.Tasks
 
         }
 
-        public void OnAdd(VillagerAI AI)
+        public void OnAdd(AIBase AI)
         {
             AI.Animator.SetBool("IsIdle", false);
             AI.Animator.SetBool("IsWalking", true);
             AI.Animator.SetBool("IsRunning", false);
+            AI.NavAgent.speed = 5;
         }
 
-        public void OnRemove(VillagerAI AI)
+        public void OnRemove(AIBase AI)
         {
 
         }
 
-        public void Update(VillagerAI AI)
+        public void Update(AIBase AI)
         {
             if (!AI.NavAgent.hasPath)
             {

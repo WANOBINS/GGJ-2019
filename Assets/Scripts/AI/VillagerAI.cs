@@ -7,11 +7,10 @@ using WBase.Unity.Util;
 
 namespace AI
 {
-    [RequireComponent(typeof(Animator))]
-    public class VillagerAI : MonoBehaviour
+    public class VillagerAI : AIBase
     {
-        public static readonly IAITask IDLE = new IdleTask();
-        public static readonly IAITask WANDER = new WanderTask();
+
+
         public static readonly IAITask HOME = new ReturnHomeTask();
         public static readonly IAITask FLEE = new FleeTask();
 
@@ -19,43 +18,15 @@ namespace AI
         public const double FLEE_UPDATE_DELAY = 1;
         public const double WANDER_UPDATE_DELAY = 10;
 
-        public Animator Animator { get; private set; }
-        public NavMeshAgent NavAgent { get; private set; }
-        public GameObject[] Enemies { get; private set; }
-        public UnityEngine.Random RNG { get; private set; }
-
-        private IAITask currentTask;
-        public IAITask CurrentTask
+        public override void Awake()
         {
-            get
-            {
-                return currentTask;
-            }
-            set
-            {
-                if (currentTask == value)
-                {
-                    ResetAnim();
-                    return;
-                }
-                currentTask.OnRemove(this);
-                currentTask = value;
-                currentTask.OnAdd(this);
-            }
+            base.Awake();
+
         }
 
-        public void Awake()
+        public override void Start()
         {
-            UnityEngine.Random.InitState(TimeUtil.UnixTimestamp);
-            Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            Animator = GetComponent<Animator>();
-            NavAgent = transform.parent.GetComponent<NavMeshAgent>();
-        }
-
-        public void Start()
-        {
-            IDLE.Initialize();
-            WANDER.Initialize();
+            base.Start();
             HOME.Initialize();
             FLEE.Initialize();
         }
@@ -63,9 +34,14 @@ namespace AI
         /// <summary>
         /// All AI decisions should be made here
         /// </summary>
-        public void Update()
+        public override void Update()
         {
-            if ((Enemies.GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
+            base.Update();
+            if(NavAgent.hasPath && CurrentTask == IDLE)
+            {
+                CurrentTask = WANDER;
+            }
+            if (GameManager.Enemies.Count > 0 && (GameManager.Enemies.ToArray().GetClosestTo(transform.position).transform.position - transform.position).magnitude < FleeDistance)
             {
                 CurrentTask = FLEE;
             }
@@ -74,11 +50,9 @@ namespace AI
             CurrentTask.Update(this);
         }
 
-        public void ResetAnim()
+        public override void ResetAnim()
         {
-            Animator.SetBool("IsIdle", true);
-            Animator.SetBool("IsWalking", false);
-            Animator.SetBool("IsRunning", false);
+            base.ResetAnim();
         }
     }
 }

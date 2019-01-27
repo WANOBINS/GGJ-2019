@@ -634,7 +634,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: fe88925e-20da-43ab-9171-016f36771a10
   projectName: GGJ 2019
   organizationId: wanobins

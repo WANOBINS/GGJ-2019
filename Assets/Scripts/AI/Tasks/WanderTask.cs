@@ -6,7 +6,7 @@ namespace AI.Tasks
 {
     internal class WanderTask : IAITask
     {
-        public VillagerAI AI { get; private set; }
+        public AIBase AI { get; private set; }
         public double LastDestTime { get; private set; }
 
         public void Initialize()
@@ -14,20 +14,21 @@ namespace AI.Tasks
 
         }
 
-        public void OnAdd(VillagerAI AI)
+        public void OnAdd(AIBase AI)
         {
             this.AI = AI;
             AI.Animator.SetBool("IsIdle", false);
             AI.Animator.SetBool("IsWalking", true);
             AI.Animator.SetBool("IsRunning", false);
+            AI.NavAgent.speed = 5;
         }
 
-        public void OnRemove(VillagerAI AI)
+        public void OnRemove(AIBase AI)
         {
             this.AI = null;
         }
 
-        public void Update(VillagerAI AI)
+        public void Update(AIBase AI)
         {
             if (!AI.NavAgent.hasPath || Time.time > LastDestTime + VillagerAI.WANDER_UPDATE_DELAY)
             {

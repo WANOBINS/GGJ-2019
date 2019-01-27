@@ -8,7 +8,7 @@ public class GodCamera : MonoBehaviour
     [SerializeField]
     private float flySpeed = .25f;
     [SerializeField]
-    private float zoomSpeed = 1.5f;
+    private float zoomSpeed = 10000f;
     public float lookSensitivity = 1.5f;    
     private bool camRotate = false;
     private float rotateX;
