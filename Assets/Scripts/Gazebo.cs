@@ -20,12 +20,7 @@ public class Gazebo : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<Rigidbody>().IsSleeping())
-        {
-            if (!LastSleepCheck)
-                gameManager.UpdateNavMesh();
-            LastSleepCheck = GetComponent<Rigidbody>().IsSleeping();
-        }
+        
     }
 
     private void OnDestroy()

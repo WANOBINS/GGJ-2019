@@ -22,9 +22,6 @@ public class House : MonoBehaviour {
 	void Update () {
         if (GetComponent<Rigidbody>().IsSleeping())
         {
-            if(!LastSleepCheck)
-                gameManager.UpdateNavMesh();
-            
             if (Villager1 == null)
             {
                 Villager1 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
@@ -34,7 +31,6 @@ public class House : MonoBehaviour {
                 Villager2 = Instantiate(VillagerPrefab, transform.position, transform.rotation).GetComponent<Villager>();
             }
         }
-        LastSleepCheck = GetComponent<Rigidbody>().IsSleeping();
     }
 
     private void OnDestroy()
