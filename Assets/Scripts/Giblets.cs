@@ -5,11 +5,13 @@ using UnityEngine;
 using Log = UnityEngine.Debug;
 
 public class Giblets : MonoBehaviour {
-
+    GameManager gameManager;
 	// Use this for initialization
 	void Start () {
-		
-	}
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        if(!gameManager.Gibs.Contains(gameObject))
+            gameManager.Gibs.Add(gameObject);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,7 +25,16 @@ public class Giblets : MonoBehaviour {
         if (Demon == null)
             return;
         Demon.GibCount++;
-        Demon.GameManager.Gibs.Remove(gameObject);
+        if(gameManager.Gibs.Contains(gameObject))
+            gameManager.Gibs.Remove(gameObject);
+        Destroy(gameObject);
+    }
+
+    void Collect()
+    {
+        if (gameManager.Gibs.Contains(gameObject))
+            gameManager.Gibs.Remove(gameObject);
+        gameManager.PlayerGibs++;
         Destroy(gameObject);
     }
 }
